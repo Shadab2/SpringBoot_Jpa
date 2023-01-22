@@ -65,4 +65,9 @@ class StudentRepositoryTest {
             String guardianName = studentRepository.getStudentGuardianNameByStudentEmail("Shadab@gmail.com");
             System.out.println("guardianName = " + guardianName);
         }
+
+        @Test
+        public void updateStudentFirstNameByEmailId(){
+            studentRepository.updateStudentFirstNameByEmailid("Akhtar","akram@gmail.com");
+        }
 }
