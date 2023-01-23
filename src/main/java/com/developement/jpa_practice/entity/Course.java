@@ -1,10 +1,7 @@
 package com.developement.jpa_practice.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Data
@@ -14,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Table(
         name = "course_tbl"
 )
+@ToString(exclude = "teacher")
 public class Course {
 
     @Id
@@ -29,4 +27,16 @@ public class Course {
     private long courseId;
     private String title;
     private Integer credit;
+
+    @OneToOne(
+            mappedBy = "course"
+    )
+    private CourseMaterial courseMaterial;
+
+    @ManyToOne
+    @JoinColumn(
+            name = "teacher_id",
+            referencedColumnName = "teacherId"
+    )
+    private Teacher teacher;
 }

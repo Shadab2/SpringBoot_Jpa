@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -31,13 +33,12 @@ class CourseRepositoryTest {
     @Test
     public void saveCourseMaterialWithCourse(){
         Course course = Course.builder()
-                .title("Data Structures and Algorithms")
-                .credit(5)
-                .title("DSA")
+                .title("English Honors")
+                .credit(2)
                 .build();
         CourseMaterial courseMaterial = CourseMaterial.builder()
                 .course(course)
-                .url("http://dsa.com")
+                .url("http://english.com")
                 .build();
         CourseMaterial courseMaterial1 = courseMaterialRepository.save(courseMaterial);
         System.out.println("courseMaterial1 = " + courseMaterial1);
@@ -52,5 +53,15 @@ class CourseRepositoryTest {
                 .build();
         Course savedCourse = courseRepository.save(course);
         System.out.println("savedCourse = " + savedCourse);
+    }
+    @Test 
+    public void printAllCourse(){
+        List<Course> courseList = courseRepository.findAll();
+        System.out.println("courseList = " + courseList);
+    }
+    
+    @Test void printAllCourseMaterials(){
+        List<CourseMaterial> courseMaterialList  = courseMaterialRepository.findAll();
+        System.out.println("courseMaterialList = " + courseMaterialList);
     }
 }

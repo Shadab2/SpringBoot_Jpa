@@ -1,10 +1,7 @@
 package com.developement.jpa_practice.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Data
@@ -13,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Table(
         name = "course_material_tbl"
-)
+)@ToString(exclude = "course")
 public class CourseMaterial {
     @Id
     @SequenceGenerator(
@@ -29,7 +26,8 @@ public class CourseMaterial {
     private String url;
 
     @OneToOne(
-            cascade = CascadeType.ALL // for creating Course if not available
+            cascade = CascadeType.ALL , // for creating Course if not available
+            fetch = FetchType.LAZY
     )
     @JoinColumn(
             name = "course_id", // foreign key
